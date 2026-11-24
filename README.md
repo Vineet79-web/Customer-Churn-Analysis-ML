@@ -22,17 +22,32 @@ python churn_analysis.py
 Outputs are written to `outputs/` (`key_stats.json`, `model_results.csv`, `figures/`).
 
 ## Key findings
-> Fill this in AFTER you run the script, using the numbers it prints.
+Results on the full dataset (7,043 customers; 1,869 churned):
 
-- Overall churn rate: **__%**
-- Share of churned customers on monthly contracts: **__%**
-- Share of churned customers with tenure under 3 months: **__%**
-- Best model: **__** (ROC-AUC **__**, churn recall **__**)
+- Overall churn rate: **26.5%**.
+- **88.6%** of churned customers were on **month-to-month contracts**. Churn rate by contract: **42.7%** month-to-month vs **11.3%** one-year vs **2.8%** two-year.
+- Churn falls sharply with tenure: **56.2%** of customers in their first 3 months churned, vs **9.5%** of those with 4+ years.
+- **26.8%** of all churned customers were on a monthly contract with under 3 months of tenure.
+- Fiber optic customers churn more (**41.9%**) than DSL (**19.0%**) and no-internet customers (**7.4%**).
+
+### Model results (20% hold-out test set)
+| Model | Accuracy | Precision (churn) | Recall (churn) | F1 (churn) | ROC-AUC |
+|---|---|---|---|---|---|
+| Logistic Regression | 0.737 | 0.503 | 0.791 | 0.615 | **0.846** |
+| Random Forest | 0.757 | 0.530 | 0.767 | 0.627 | 0.841 |
+
+Both models use class weights to handle the imbalance (26.5% churners). Logistic Regression has the best ROC-AUC and catches the most churners (recall 0.79); Random Forest is slightly more accurate overall.
 
 ## Business recommendations
-- Offer incentives to move monthly-contract customers to annual plans.
-- Run onboarding / early-engagement campaigns in the first 3 months.
-- Bundle support and security add-ons, since customers with more services churn less (verify in the charts).
+- Offer incentives to move month-to-month customers to annual contracts.
+- Run onboarding and early-engagement campaigns in the first 3 months, when churn is highest.
+- Investigate service quality and pricing for fiber optic customers, who churn at twice the rate of DSL customers.
+
+## Charts
+![Churn by contract](outputs/figures/06_churn_by_contract.png)
+![Churn by tenure band](outputs/figures/07_churn_by_tenure_band.png)
+![Heatmap contract x tenure](outputs/figures/10_heatmap_contract_tenure.png)
+![Feature importance](outputs/figures/12_feature_importance.png)
 
 ## Tech stack
 Python, Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn
