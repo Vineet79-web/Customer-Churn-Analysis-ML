@@ -1,0 +1,3 @@
+model,accuracy,precision_churn,recall_churn,f1_churn,roc_auc
+Logistic Regression,0.737,0.503,0.791,0.615,0.846
+Random Forest,0.757,0.53,0.767,0.627,0.841

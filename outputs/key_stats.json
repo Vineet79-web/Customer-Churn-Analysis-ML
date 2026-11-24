@@ -1,0 +1,12 @@
+{
+  "customers":7043,
+  "overall_churn_rate_pct":26.5,
+  "churned_on_monthly_contract_pct":88.6,
+  "churned_with_tenure_under_3_months_pct":26.9,
+  "churned_monthly_AND_tenure_under_3_months_pct":26.8,
+  "churn_rate_by_contract_pct":{
+    "Month-to-month":42.7,
+    "One year":11.3,
+    "Two year":2.8
+  }
+}
